@@ -101,14 +101,25 @@ include_once 'config.php';
                    "\n Capacidad publico: " . $this->getCapacidadPublico() . "\n Clima: " . $this->getClima();
         }
 
-        public function arenaDB(){
-            if($this)
+        public function guardarArenaDB(){
+            if($this ->idArena){
+                $database->update("arenas",
+                [
+                    "idArena" => $this->Arena->getIdArena(),
+                    "nombre" => $this->nombre,
+                    "dificultad" => $this->dificultad,
+                    "capacidadPublico" => $this->capacidadPublico,
+                    "clima" => $this->clima
+                ]
+                );
+            }else{
                 $database -> insert("arenas",
             ["idArena" => $this->Arena->getIdArena(),
             "nombre" => $this->nombre,
             "dificultad" => $this->dificultad,
             "capacidadPublico" => $this->capacidadPublico,
             "clima" => $this->clima]);
+            }
         }
 
         public function consultaArenaDB(){
