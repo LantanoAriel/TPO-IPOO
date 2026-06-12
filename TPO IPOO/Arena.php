@@ -8,7 +8,8 @@ include_once 'config.php';
         private int $capacidadPublico; 
         private string $clima;
     
-        public function __construct(string $nombre, string $dificultad, int $capacidadPublico, string $clima){
+        public function __construct(int $idArena = null, string $nombre, string $dificultad, int $capacidadPublico, string $clima){
+            $this->idArena = $idArena;
             $this->nombre = $nombre;
             $this->dificultad = $dificultad;
             $this->capacidadPublico = $capacidadPublico;
@@ -101,15 +102,17 @@ include_once 'config.php';
         }
 
         public function arenaDB(){
+            if($this)
                 $database -> insert("arenas",
-            ["nombre" => $this->nombre,
+            ["idArena" => $this->Arena->getIdArena(),
+            "nombre" => $this->nombre,
             "dificultad" => $this->dificultad,
             "capacidadPublico" => $this->capacidadPublico,
             "clima" => $this->clima]);
         }
 
         public function consultaArenaDB(){
-                select(arenas,["[><]duelos"=>["id"=>"idArena"]],[] )
+                select(arenas,["[><]duelos"=>["id"=>"idArena"S]],[] )
         }
 
 }
